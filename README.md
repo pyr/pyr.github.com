@@ -1,10 +1,11 @@
-twitter.github.com
-======
+brutasse.github.io
+==================
 
-The source code of http://twitter.github.com/
+Based on the source code for http://twitter.github.io/, rewritten in
+AngularJS.
 
 LICENSE
-------------
+-------
 
 Copyright 2012 Twitter, Inc.
 
