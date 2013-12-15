@@ -34,7 +34,6 @@ app.filter('ago', function() {
 
 app.controller("GithubController", ['$scope', 'github', function(scope, github) {
     var config = document.body.dataset;
-    console.log(config);
 
     var week_half_life  = 1.146 * Math.pow(10, -9);
     var push_weight = 1;
@@ -85,7 +84,6 @@ app.controller("GithubController", ['$scope', 'github', function(scope, github) 
     if (config.additional) {
         var extra = config.additional.split(',');
         _.each(extra, function(repo) {
-            console.log(extra);
             github.getRepo(repo).success(got_repo);
         });
     }
