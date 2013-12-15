@@ -213,3 +213,7 @@ li.repo h3 {
 .repo.python:after {
   border-right-color: #6aad2d;
 }
+
+[ng-cloak] {
+	display: none;
+}
