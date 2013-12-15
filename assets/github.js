@@ -72,6 +72,10 @@ app.controller("GithubController", ['$scope', 'github', function(scope, github) 
             .sortBy(hotness)
             .reverse()
             .value()
+
+        scope.source_repos = _.filter(repos, function(repo) {
+            return !repo.fork;
+        }).length;
     };
     var got_repo = function(data) {
         got_repos([data]);

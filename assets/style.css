@@ -97,7 +97,7 @@ div.header h1 {
   margin-bottom: 10px;
 }
 
-#num-repos, #num-members {
+#num-repos, #num-members, #num-source-repos {
   font-size: 14px;
   font-weight: bold;
   color: #0084b4;

@@ -23,7 +23,9 @@
 				<div id="statistics" class="grid-1 alpha header">
 					<h1>Statistics</h1>
 					<p ng-show="user">
-						<a href="https://github.com/{{ user.login }}/repositories"><span id="num-repos">{{ user.public_repos }}</span> public repos</a>
+						<a href="https://github.com/{{ user.login }}?tab=repositories"><span id="num-repos">{{ user.public_repos }}</span> public repos</a>
+						<br>
+						<a ng-show="source_repos" href="https://github.com/{{ user.login }}?tab=repositories"><span id="num-source-repos">{{ source_repos }}</span> source repos</a>
 						<br>
 						<strong>{{ user.created_at | ago }}</strong> of GitHub age
 					</p>
