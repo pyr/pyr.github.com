@@ -1,6 +1,6 @@
 var app = angular.module("github", []);
 
-app.factory('github', ['$http', function(http) {
+app.factory('github', ['$http', '$q', function(http, q) {
     var api_root = 'https://api.github.com';
 
     return {
@@ -8,7 +8,22 @@ app.factory('github', ['$http', function(http) {
             return http.get(api_root + '/users/' + username);
         },
         getRepos: function(username) {
-            return http.get(api_root + '/users/' + username + '/repos');
+            var repos_p = q.defer();
+            var url = api_root + '/users/' + username + '/repos';
+            var repos = [];
+
+            var fetch_page = function(pagenum) {
+                http.get(url + '?per_page=100&page=' + pagenum).success(function(data) {
+                    if (!data.length) {
+                        repos_p.resolve(repos);
+                    } else {
+                        repos = repos.concat(data);
+                        fetch_page(pagenum + 1);
+                    }
+                });
+            };
+            fetch_page(1);
+            return repos_p.promise;
         },
         getRepo: function(repo) {
             return http.get(api_root + '/repos/' + repo);
@@ -80,7 +95,7 @@ app.controller("GithubController", ['$scope', 'github', function(scope, github) 
         got_repos([data]);
     };
 
-    github.getRepos(config.username).success(got_repos);
+    github.getRepos(config.username).then(got_repos);
     if (config.additional) {
         var extra = config.additional.split(',');
         _.each(extra, function(repo) {
