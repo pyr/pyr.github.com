@@ -2,6 +2,7 @@ var app = angular.module("github", []);
 
 app.factory('github', ['$http', '$q', function(http, q) {
     var api_root = 'https://api.github.com';
+    var per_page = 100;
 
     return {
         getUser: function(username) {
@@ -13,11 +14,11 @@ app.factory('github', ['$http', '$q', function(http, q) {
             var repos = [];
 
             var fetch_page = function(pagenum) {
-                http.get(url + '?per_page=100&page=' + pagenum).success(function(data) {
-                    if (!data.length) {
+                http.get(url + '?per_page=' + per_page + '&page=' + pagenum).success(function(data) {
+                    repos = repos.concat(data);
+                    if (data.length < per_page) {
                         repos_p.resolve(repos);
                     } else {
-                        repos = repos.concat(data);
                         fetch_page(pagenum + 1);
                     }
                 });
