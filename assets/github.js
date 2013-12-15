@@ -84,7 +84,7 @@ app.controller("GithubController", ['$scope', 'github', function(scope, github) 
     if (config.additional) {
         var extra = config.additional.split(',');
         _.each(extra, function(repo) {
-            github.getRepo(repo).success(got_repo);
+            github.getRepo(repo.trim()).success(got_repo);
         });
     }
 }]);
