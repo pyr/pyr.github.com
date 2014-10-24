@@ -38,7 +38,7 @@ app.directive('ghImg', function() {
         scope: {
             'src': '='
         },
-        template: '<img src="{{ src }}">'
+        template: '<img src="{{ src }}" width="100">'
     };
 });
 
